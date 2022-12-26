@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+	private Animator anim;
 	private CharacterController controller;
 
 	private float moveY;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Awake()
 	{
+		anim = GetComponentInChildren<Animator>();
 		controller = GetComponent<CharacterController>();
 	}
 
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
 	private void Update()
 	{
 		Move();
+		Rotate();
 		Jump();
 	}
 
@@ -38,14 +41,17 @@ public class PlayerController : MonoBehaviour
 		Vector3 moveInput = Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal");
 		if (moveInput.sqrMagnitude > 1f) moveInput.Normalize();
 
+		anim.SetFloat("XInput", Input.GetAxisRaw("Horizontal"));
+		anim.SetFloat("YInput", Input.GetAxisRaw("Vertical"));
+
 		Vector3 moveVec = fowardVec * moveInput.z + rightVec * moveInput.x;
 
 		controller.Move(moveVec * moveSpeed * Time.deltaTime);
+	}
 
-		if (moveVec.sqrMagnitude != 0)
-		{
-			transform.forward = Vector3.Lerp(transform.forward, moveVec, 0.8f);
-		}
+	private void Rotate()
+	{
+		transform.forward = new Vector3(Camera.main.transform.forward.x, 0f, Camera.main.transform.forward.z).normalized;
 	}
 
 	private void Jump()
