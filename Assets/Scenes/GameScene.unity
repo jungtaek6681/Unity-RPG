@@ -468,7 +468,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6507647}
-  m_LocalRotation: {x: 0.1803615, y: 0.00053556706, z: -0.00009820622, w: 0.98360026}
+  m_LocalRotation: {x: 0.1803615, y: 0.00053556706, z: -0.00009820624, w: 0.98360026}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -28881,11 +28881,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 403594, guid: 77c54194384c09a45b991556c9fe41a5, type: 3}
   m_PrefabInstance: {fileID: 1153143975}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1154571908 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4973859900546553967, guid: 187257368e9bda2498fca883c2130798, type: 3}
-  m_PrefabInstance: {fileID: 7891735298183752775}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1158097745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53263,10 +53258,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3526784076672788133, guid: 187257368e9bda2498fca883c2130798, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: ac5f927e7ad9b1c479518b60c503b898, type: 2}
     - target: {fileID: 4973859900546553967, guid: 187257368e9bda2498fca883c2130798, type: 3}
       propertyPath: m_Name
       value: Player
@@ -53278,35 +53269,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3122128149437915798, guid: 187257368e9bda2498fca883c2130798, type: 3}
   m_PrefabInstance: {fileID: 7891735298183752775}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7891735298183752777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1154571908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 253618cf4e34ef94b9dd0b883e8f91d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpSpeed: 8
---- !u!143 &7891735298183752778
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1154571908}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1.8
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.1
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
