@@ -41,12 +41,14 @@ public class PlayerController : MonoBehaviour
 		Vector3 moveInput = Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal");
 		if (moveInput.sqrMagnitude > 1f) moveInput.Normalize();
 
-		anim.SetFloat("XInput", Input.GetAxisRaw("Horizontal"));
-		anim.SetFloat("YInput", Input.GetAxisRaw("Vertical"));
+		anim.SetFloat("XInput", Input.GetAxis("Horizontal"));
+		anim.SetFloat("YInput", Input.GetAxis("Vertical"));
 
 		Vector3 moveVec = fowardVec * moveInput.z + rightVec * moveInput.x;
 
 		controller.Move(moveVec * moveSpeed * Time.deltaTime);
+
+		anim.SetFloat("MoveSpeed", moveSpeed);
 	}
 
 	private void Rotate()
