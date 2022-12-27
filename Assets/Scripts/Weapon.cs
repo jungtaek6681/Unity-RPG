@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-	private Collider collider;
+	private new Collider collider;
 
 	private void Awake()
 	{
@@ -20,14 +20,5 @@ public class Weapon : MonoBehaviour
 	public void DisableCollider()
 	{
 		collider.enabled = false;
-	}
-
-	private void OnTriggerEnter(Collider other)
-	{
-		Debug.Log("트리거 진입");
-		if (other.gameObject.name == "Cube")
-		{
-			Destroy(other.gameObject);
-		}
 	}
 }

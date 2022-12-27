@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
 	[SerializeField]
 	private WeaponHolder weaponHolder;
+	[SerializeField]
+	private float attackRange;
 
 	private void Awake()
 	{
@@ -98,18 +100,31 @@ public class PlayerController : MonoBehaviour
 			return;
 
 		anim.SetTrigger("Attack");
+		Invoke("OnAttackHit", 0.4f);
 	}
 
 	public void OnAttackStart()
 	{
 		Debug.Log("공격 시작");
-		weaponHolder.StartAttack();
+		//weaponHolder.StartAttack();
+	}
+
+	public void OnAttackHit()
+	{
+		Debug.Log("공격 타이밍");
+
+		Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
+		for(int i = 0; i < colliders.Length; i++)
+		{
+			if (colliders[i].gameObject.name == "Cube")
+				Destroy(colliders[i].gameObject);
+		}
 	}
 
 	public void OnAttackEnd()
 	{
 		Debug.Log("공격 끝");
-		weaponHolder.EndAttack();
+		//weaponHolder.EndAttack();
 	}
 
 	private void ChangeForm()
@@ -131,5 +146,11 @@ public class PlayerController : MonoBehaviour
 			anim.SetTrigger("ChangeForm");
 			anim.SetLayerWeight(1, 0);
 		}
+	}
+
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere(transform.position, attackRange);
 	}
 }
