@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 	private WeaponHolder weaponHolder;
 	[SerializeField]
 	private float attackRange;
+	[SerializeField, Range(0f, 360f)]
+	private float attackAngle;
 
 	private void Awake()
 	{
@@ -152,5 +154,16 @@ public class PlayerController : MonoBehaviour
 	{
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, attackRange);
+
+		Vector3 rightDir = AngleToDir(transform.eulerAngles.y + attackAngle * 0.5f);
+		Vector3 leftDir = AngleToDir(transform.eulerAngles.y - attackAngle * 0.5f);
+		Debug.DrawRay(transform.position, rightDir * attackRange, Color.blue);
+		Debug.DrawRay(transform.position, leftDir * attackRange, Color.blue);
+	}
+
+	private Vector3 AngleToDir(float angle)
+	{
+		float radian = angle * Mathf.Deg2Rad;
+		return new Vector3(Mathf.Sin(radian), 0, Mathf.Cos(radian));
 	}
 }
