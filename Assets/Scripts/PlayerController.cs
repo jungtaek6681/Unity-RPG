@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum PlayerState { Normal, Battle }
+
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
 	private Animator anim;
 	private CharacterController controller;
 
+	private PlayerState state;
 	private float moveY;
 
 	[SerializeField]
 	private float moveSpeed;
 	[SerializeField]
 	private float jumpSpeed;
+
+	[SerializeField]
+	private WeaponHolder weaponHolder;
 
 	private void Awake()
 	{
@@ -23,14 +29,28 @@ public class PlayerController : MonoBehaviour
 
 	private void Start()
 	{
+		state = PlayerState.Normal;
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	private void Update()
 	{
-		Move();
-		Rotate();
-		Jump();
+		switch (state)
+		{
+			case PlayerState.Normal:
+				Move();
+				Rotate();
+				Jump();
+				ChangeForm();
+				break;
+			case PlayerState.Battle:
+				Move();
+				Rotate();
+				Jump();
+				Attack();
+				ChangeForm();
+				break;
+		}
 	}
 
 	private void Move()
@@ -70,5 +90,34 @@ public class PlayerController : MonoBehaviour
 		}
 
 		controller.Move(Vector3.up * moveY * Time.deltaTime);
+	}
+
+	private void Attack()
+	{
+		if (!Input.GetButtonDown("Fire1"))
+			return;
+
+		// 공격 진행
+	}
+
+	private void ChangeForm()
+	{
+		if (!Input.GetButtonDown("Fire2"))
+			return;
+
+		if (state == PlayerState.Normal)
+		{
+			state = PlayerState.Battle;
+			weaponHolder.ShowWeapon();
+			anim.SetTrigger("ChangeForm");
+			anim.SetLayerWeight(1, 1);
+		}
+		else if (state == PlayerState.Battle)
+		{
+			state = PlayerState.Normal;
+			weaponHolder.HideWeapon();
+			anim.SetTrigger("ChangeForm");
+			anim.SetLayerWeight(1, 0);
+		}
 	}
 }
