@@ -97,7 +97,19 @@ public class PlayerController : MonoBehaviour
 		if (!Input.GetButtonDown("Fire1"))
 			return;
 
-		// 공격 진행
+		anim.SetTrigger("Attack");
+	}
+
+	public void OnAttackStart()
+	{
+		Debug.Log("공격 시작");
+		weaponHolder.StartAttack();
+	}
+
+	public void OnAttackEnd()
+	{
+		Debug.Log("공격 끝");
+		weaponHolder.EndAttack();
 	}
 
 	private void ChangeForm()

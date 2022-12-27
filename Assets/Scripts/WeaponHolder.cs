@@ -21,4 +21,14 @@ public class WeaponHolder : MonoBehaviour
 	{
 		curWeapon.gameObject.SetActive(false);
 	}
+
+	public void StartAttack()
+	{
+		curWeapon.EnableCollider();
+	}
+
+	public void EndAttack()
+	{
+		curWeapon.DisableCollider();
+	}
 }
