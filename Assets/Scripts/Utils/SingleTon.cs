@@ -27,12 +27,12 @@ public class SingleTon<T> : MonoBehaviour where T : MonoBehaviour
 		}
 	}
 
-	private void Awake()
+	public virtual void Awake()
 	{
 		if (instance == null)
 		{
 			instance = this as T;
-			
+			DontDestroyOnLoad(gameObject);
 		}
 		else
 		{
