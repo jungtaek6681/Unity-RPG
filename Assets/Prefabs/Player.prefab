@@ -94,9 +94,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpSpeed: 8
+  showAttackGizmos: 0
   weaponHolder: {fileID: 1726869343}
   attackRange: 1.5
   attackAngle: 120
+  showInterActionGizmos: 1
+  interActionRange: 2
+  interActionAngle: 120
 --- !u!143 &7891735298183752778
 CharacterController:
   m_ObjectHideFlags: 0

@@ -13,17 +13,29 @@ public class PlayerController : MonoBehaviour
 	private PlayerState state;
 	private float moveY;
 
+	[Header("General")]
 	[SerializeField]
 	private float moveSpeed;
 	[SerializeField]
 	private float jumpSpeed;
 
+	[Header("Attack")]
+	[SerializeField]
+	private bool showAttackGizmos;
 	[SerializeField]
 	private WeaponHolder weaponHolder;
 	[SerializeField]
 	private float attackRange;
 	[SerializeField, Range(0f, 360f)]
 	private float attackAngle;
+
+	[Header("InterAction")]
+	[SerializeField]
+	private bool showInterActionGizmos;
+	[SerializeField]
+	private float interActionRange;
+	[SerializeField, Range(0f, 360f)]
+	private float interActionAngle;
 
 	private void Awake()
 	{
@@ -45,6 +57,7 @@ public class PlayerController : MonoBehaviour
 				Move();
 				Rotate();
 				Jump();
+				InterAction();
 				ChangeForm();
 				break;
 			case PlayerState.Battle:
@@ -159,15 +172,49 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	private void InterAction()
+	{
+		if (!Input.GetButtonDown("InterAction"))
+			return;
+
+		// 1. 범위내에 있는가
+		Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange);
+		for (int i = 0; i < colliders.Length; i++)
+		{
+			Vector3 dirToTarget = (colliders[i].transform.position - transform.position).normalized;
+
+			// 2. 각도내에 있는가
+			if (Vector3.Dot(transform.forward, dirToTarget) < Mathf.Cos(attackAngle * 0.5f * Mathf.Deg2Rad))
+				continue;
+
+			IInteractable target = colliders[i].GetComponent<IInteractable>();
+			target?.Interaction(this);
+		}
+	}
+
 	private void OnDrawGizmosSelected()
 	{
-		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(transform.position, attackRange);
+		if (showAttackGizmos)
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawWireSphere(transform.position, attackRange);
 
-		Vector3 rightDir = AngleToDir(transform.eulerAngles.y + attackAngle * 0.5f);
-		Vector3 leftDir = AngleToDir(transform.eulerAngles.y - attackAngle * 0.5f);
-		Debug.DrawRay(transform.position, rightDir * attackRange, Color.blue);
-		Debug.DrawRay(transform.position, leftDir * attackRange, Color.blue);
+			Vector3 rightDir = AngleToDir(transform.eulerAngles.y + attackAngle * 0.5f);
+			Vector3 leftDir = AngleToDir(transform.eulerAngles.y - attackAngle * 0.5f);
+			Debug.DrawRay(transform.position, rightDir * attackRange, Color.blue);
+			Debug.DrawRay(transform.position, leftDir * attackRange, Color.blue);
+		}
+
+		if (showInterActionGizmos)
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawWireSphere(transform.position, interActionRange);
+
+			Vector3 rightDir = AngleToDir(transform.eulerAngles.y + interActionAngle * 0.5f);
+			Vector3 leftDir = AngleToDir(transform.eulerAngles.y - interActionAngle * 0.5f);
+			Debug.DrawRay(transform.position, rightDir * interActionRange, Color.blue);
+			Debug.DrawRay(transform.position, leftDir * interActionRange, Color.blue);
+		}
 	}
 
 	private Vector3 AngleToDir(float angle)
