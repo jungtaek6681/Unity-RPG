@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Equipment : MonoBehaviour, IInteractable
+public class Equipment : MonoBehaviour
 {
-	public void Interaction(PlayerController player)
+	public void AddToInventory()
 	{
-		Debug.Log(string.Format("{0}가 {1}와 상호작용하고 사라짐.", gameObject.name, player.gameObject.name));
+		Debug.Log(string.Format("{0}를 인벤토리에 집어넣음.", gameObject.name));
 		Destroy(gameObject);
 	}
 }
