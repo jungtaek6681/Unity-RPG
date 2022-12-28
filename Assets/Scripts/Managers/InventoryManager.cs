@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class InventoryManager : SingleTon<InventoryManager>
 {
-	private List<Item> items;
+	private List<InventoryItem> items;
 
 	private void Awake()
 	{
-		items = new List<Item>();
+		items = new List<InventoryItem>();
 	}
 
 	public void AddItem(Item item)
 	{
-		items.Add(item);
+		InventoryItem instance = new InventoryItem();
+		items.Add(instance);
+		instance.data = item.data;
 	}
 }
