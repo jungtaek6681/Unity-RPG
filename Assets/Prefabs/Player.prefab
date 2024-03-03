@@ -2442,7 +2442,7 @@ GameObject:
   - component: {fileID: 3848221139094777344}
   - component: {fileID: 6353842020507747014}
   - component: {fileID: 7242769844969917627}
-  - component: {fileID: 5263973401905620640}
+  - component: {fileID: 9185193633254682351}
   - component: {fileID: 2140160768870486983}
   m_Layer: 3
   m_Name: Player
@@ -2572,6 +2572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd32bf54f8912c42ab1db8435418129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   animator: {fileID: 1912444896586375942}
   layerMask:
     serializedVersion: 2
@@ -2579,7 +2580,7 @@ MonoBehaviour:
   range: 2
   angle: 90
   damage: 1
---- !u!114 &5263973401905620640
+--- !u!114 &9185193633254682351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2588,14 +2589,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8376152141106974090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c72df0ee242c2d9428511a943947ce6c, type: 3}
+  m_Script: {fileID: 11500000, guid: e1009baf6e76f03419b0038d831d8b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetLayerMask:
+  debug: 0
+  layerMask:
     serializedVersion: 2
-    m_Bits: 64
-  range: 5
-  repeatTime: 1
+    m_Bits: 256
+  range: 2
 --- !u!114 &2140160768870486983
 MonoBehaviour:
   m_ObjectHideFlags: 0

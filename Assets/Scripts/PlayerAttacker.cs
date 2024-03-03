@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttacker : MonoBehaviour
 {
+    [SerializeField] bool debug;
+
     [SerializeField] Animator animator;
     [SerializeField] LayerMask layerMask;
     [SerializeField] float range;
@@ -54,6 +56,9 @@ public class PlayerAttacker : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        if (debug == false)
+            return;
+
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
 
