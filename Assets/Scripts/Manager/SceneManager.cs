@@ -54,6 +54,8 @@ public class SceneManager : MonoBehaviour
         }
 
         Time.timeScale = 0f;
+        BaseScene prevScene = GetCurScene();
+        prevScene.SaveScene();
         loadingBar.gameObject.SetActive(true);
         AsyncOperation oper = UnitySceneManager.LoadSceneAsync(sceneName);
         while (oper.isDone == false)
@@ -62,6 +64,7 @@ public class SceneManager : MonoBehaviour
             yield return null;
         }
         BaseScene curScene = GetCurScene();
+        curScene.LoadScene();
         yield return curScene.LoadingRoutine();
         loadingBar.value = 1f;
 
@@ -75,5 +78,10 @@ public class SceneManager : MonoBehaviour
             fade.color = Color.Lerp(fadeOutColor, fadeInColor, rate);
             yield return null;
         }
+    }
+
+    public int GetCurSceneIndex()
+    {
+        return UnitySceneManager.GetActiveScene().buildIndex;
     }
 }

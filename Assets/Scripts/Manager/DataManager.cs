@@ -30,6 +30,7 @@ public class DataManager : MonoBehaviour
         gameData = new GameData();
     }
 
+    [ContextMenu("Save")]
     public void SaveData()
     {
         if (Directory.Exists(Path.GetDirectoryName(path)) == false)
@@ -41,6 +42,7 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(path, json);
     }
 
+    [ContextMenu("Load")]
     public void LoadData()
     {
         if (File.Exists(path) == false)

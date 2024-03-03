@@ -4,18 +4,14 @@ using UnityEngine;
 [Serializable]
 public class GameData
 {
-    public int intValue;
-    public float floatValue;
-    public Vector3 vec3Value;
+    public bool[] sceneSaved;
 
-    public GameObject gameObject;
+    public GameSceneData gameScene;
 
     public GameData()
     {
-        intValue = 0;
-        floatValue = 0;
-        vec3Value = new Vector3();
-
-        gameObject = null;
+        // Set default value
+        sceneSaved = new bool[32];
+        gameScene = new GameSceneData();
     }
 }

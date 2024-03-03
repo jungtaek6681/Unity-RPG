@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMover : MonoBehaviour
+public class PlayerMover : MonoBehaviour, ISaveLoadable
 {
     [SerializeField] Animator animator;
     [SerializeField] CharacterController controller;
@@ -52,5 +52,17 @@ public class PlayerMover : MonoBehaviour
         moveInput.z = input.y;
 
         animator.SetBool("Move", input.sqrMagnitude > 0);
+    }
+
+    public void SaveData(GameData gameData)
+    {
+        gameData.gameScene.playerPos = transform.position;
+    }
+
+    public void LoadData(GameData gameData)
+    {
+        controller.enabled = false;
+        transform.position = gameData.gameScene.playerPos;
+        controller.enabled = true;
     }
 }

@@ -1,12 +1,48 @@
 {
-    "intValue": 0,
-    "floatValue": 0.0,
-    "vec3Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "gameObject": {
-        "instanceID": 0
+    "sceneSaved": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+    ],
+    "gameScene": {
+        "playerPos": {
+            "x": -28.0,
+            "y": -5.960464477539063e-8,
+            "z": -20.0
+        },
+        "boxPos": {
+            "x": -27.969999313354493,
+            "y": 0.6700000166893005,
+            "z": -13.65999984741211
+        }
     }
 }

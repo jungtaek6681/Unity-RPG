@@ -2576,7 +2576,7 @@ MonoBehaviour:
   animator: {fileID: 1912444896586375942}
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   range: 2
   angle: 90
   damage: 1
@@ -2592,7 +2592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1009baf6e76f03419b0038d831d8b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 0
+  debug: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 256
