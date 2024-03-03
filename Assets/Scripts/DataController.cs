@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DataController : MonoBehaviour
 {
-    public int value;
+    public GameData gameData;
 
     private void Start()
     {
@@ -18,7 +18,8 @@ public class DataController : MonoBehaviour
 #else
         string path = Path.Combine(Application.persistentDataPath, "data.text");
 #endif
-        File.WriteAllText(path, value.ToString());
+        string json = JsonUtility.ToJson(gameData, true);
+        File.WriteAllText(path, json);
     }
 
     [ContextMenu("Load")]
@@ -35,14 +36,14 @@ public class DataController : MonoBehaviour
         }
         else
         {
-            string text = File.ReadAllText(path);
-            value = int.Parse(text);
+            string json = File.ReadAllText(path);
+            gameData = JsonUtility.FromJson<GameData>(json);
         }
     }
 
     private void Create()
     {
-        value = 0;
+        gameData = new GameData();
         Save();
     }
 }
