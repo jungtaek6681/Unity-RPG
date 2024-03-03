@@ -1,9 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 public class SceneManager : MonoBehaviour
 {
+    [SerializeField] Image fade;
+    [SerializeField] Slider loadingBar;
+    [SerializeField] float fadeTime;
+
     private BaseScene curScene;
 
     public BaseScene GetCurScene()
@@ -36,10 +41,33 @@ public class SceneManager : MonoBehaviour
 
     IEnumerator LoadingRoutine(string sceneName)
     {
+        float rate;
+        Color fadeOutColor = new Color(0f, 0f, 0f, 1f);
+        Color fadeInColor = new Color(0f, 0f, 0f, 0f);
+
+        rate = 0f;
+        while (rate <= 1)
+        {
+            rate += Time.deltaTime / fadeTime;
+            fade.color = Color.Lerp(fadeInColor, fadeOutColor, rate);
+            yield return null;
+        }
+
+        loadingBar.gameObject.SetActive(true);
         AsyncOperation oper = UnitySceneManager.LoadSceneAsync(sceneName);
         while (oper.isDone == false)
         {
             Debug.Log(oper.progress);
+            loadingBar.value = oper.progress;
+            yield return null;
+        }
+        loadingBar.gameObject.SetActive(false);
+
+        rate = 0f;
+        while (rate <= 1)
+        {
+            rate += Time.deltaTime / fadeTime;
+            fade.color = Color.Lerp(fadeOutColor, fadeInColor, rate);
             yield return null;
         }
     }
