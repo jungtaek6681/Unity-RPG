@@ -1,0 +1,12 @@
+{
+    "intValue": 0,
+    "floatValue": 0.0,
+    "vec3Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "gameObject": {
+        "instanceID": 0
+    }
+}
