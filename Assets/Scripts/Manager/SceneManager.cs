@@ -53,15 +53,20 @@ public class SceneManager : MonoBehaviour
             yield return null;
         }
 
+        Time.timeScale = 0f;
         loadingBar.gameObject.SetActive(true);
         AsyncOperation oper = UnitySceneManager.LoadSceneAsync(sceneName);
         while (oper.isDone == false)
         {
-            Debug.Log(oper.progress);
             loadingBar.value = oper.progress;
             yield return null;
         }
+        BaseScene curScene = GetCurScene();
+        yield return curScene.LoadingRoutine();
+        loadingBar.value = 1f;
+
         loadingBar.gameObject.SetActive(false);
+        Time.timeScale = 1f;
 
         rate = 0f;
         while (rate <= 1)
