@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 public class SceneManager : MonoBehaviour
 {
@@ -25,5 +27,20 @@ public class SceneManager : MonoBehaviour
     public void Init()
     {
 
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        StartCoroutine(LoadingRoutine(sceneName));
+    }
+
+    IEnumerator LoadingRoutine(string sceneName)
+    {
+        AsyncOperation oper = UnitySceneManager.LoadSceneAsync(sceneName);
+        while (oper.isDone == false)
+        {
+            Debug.Log(oper.progress);
+            yield return null;
+        }
     }
 }

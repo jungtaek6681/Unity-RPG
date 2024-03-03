@@ -11,12 +11,12 @@ public class CameraController : MonoBehaviour
         {
             cinemachine.gameObject.SetActive(true);
         }
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnDisable()
     {
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
         if (cinemachine != null)
         {
             cinemachine.gameObject.SetActive(false);
