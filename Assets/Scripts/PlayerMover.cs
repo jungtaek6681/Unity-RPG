@@ -7,7 +7,7 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] CharacterController controller;
     [SerializeField] float moveSpeed;
 
-    private Vector3 moveDir;
+    private Vector3 moveInput;
     private float ySpeed;
 
     private void Update()
@@ -18,7 +18,20 @@ public class PlayerMover : MonoBehaviour
 
     private void Move()
     {
-        controller.Move(moveDir * moveSpeed * Time.deltaTime);
+        Vector3 forwardDir = Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up).normalized;
+        Vector3 rightDir = Vector3.ProjectOnPlane(Camera.main.transform.right, Vector3.up).normalized;
+
+        Debug.DrawRay(transform.position, forwardDir, Color.blue);
+        Debug.DrawRay(transform.position, rightDir, Color.green);
+
+        controller.Move(forwardDir * moveInput.z * moveSpeed * Time.deltaTime);
+        controller.Move(rightDir * moveInput.x * moveSpeed * Time.deltaTime);
+
+        if (moveInput.sqrMagnitude > 0)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(forwardDir * moveInput.z + rightDir * moveInput.x);
+            transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, 10f * Time.deltaTime);
+        }
     }
 
     private void Fall()
@@ -35,8 +48,8 @@ public class PlayerMover : MonoBehaviour
     private void OnMove(InputValue value)
     {
         Vector2 input = value.Get<Vector2>();
-        moveDir.x = input.x;
-        moveDir.z = input.y;
+        moveInput.x = input.x;
+        moveInput.z = input.y;
 
         animator.SetBool("Move", input.sqrMagnitude > 0);
     }
